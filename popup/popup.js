@@ -52,14 +52,22 @@ async function loadTabsForExam() {
   const select = elements.examTabSelect;
   select.innerHTML = '<option value="">Select a tab to lock...</option>';
 
+  let validTabsCount = 0;
   tabs.forEach(tab => {
     if (tab.url && tab.url.startsWith('http')) {
+      validTabsCount++;
       const option = document.createElement('option');
       option.value = tab.id;
       option.textContent = tab.title.length > 50 ? tab.title.substring(0, 50) + '...' : tab.title;
       select.appendChild(option);
     }
   });
+
+  if (validTabsCount === 0) {
+    select.innerHTML = '<option value="">No valid web pages open (cannot lock system pages)</option>';
+    elements.startExamBtn.disabled = true;
+    elements.startExamBtn.style.opacity = '0.5';
+  }
 }
 
 async function loadStatus() {
@@ -94,7 +102,7 @@ function updateUI(status) {
     elements.examSection.classList.remove('hidden');
 
     updateExamUI(status.activeExamSession);
-  } else {
+  } else if (status.mode === MODES.PRODUCTIVITY) {
     document.getElementById('currentSiteCard').classList.remove('hidden');
     document.getElementById('focusSection').classList.remove('hidden');
     document.querySelector('.summary-section').classList.remove('hidden');
@@ -102,6 +110,15 @@ function updateUI(status) {
 
     updateCurrentSiteUI(status.currentSite);
     updateFocusUI(status.activeSession);
+    updateStatsUI(status.today);
+  } else {
+    // MODES.NORMAL
+    document.getElementById('currentSiteCard').classList.remove('hidden');
+    document.getElementById('focusSection').classList.add('hidden');
+    document.querySelector('.summary-section').classList.remove('hidden');
+    elements.examSection.classList.add('hidden');
+
+    updateCurrentSiteUI(status.currentSite);
     updateStatsUI(status.today);
   }
 }
@@ -253,6 +270,7 @@ function setupEventListeners() {
 
   // Start Exam
   elements.startExamBtn.addEventListener('click', async () => {
+    console.log("Exam start pressed!");
     const tabId = parseInt(elements.examTabSelect.value, 10);
     if (!tabId) return;
 

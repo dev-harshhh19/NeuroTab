@@ -336,31 +336,38 @@ class StorageManager {
       const stats = websiteData[evaluatingKey];
 
       let distractingTime = 0;
+      let productiveTime = 0;
+
       if (stats) {
         for (const [domain, data] of Object.entries(stats)) {
           const rule = rules[domain] || { category: CATEGORIES.NEUTRAL };
           if (rule.category === CATEGORIES.DISTRACTING) {
             distractingTime += data.totalTime;
+          } else if (rule.category === CATEGORIES.PRODUCTIVE) {
+            productiveTime += data.totalTime;
           }
         }
-      } else {
-        // If there were literally no stats recorded, that counts as a neutral day, streak holds
       }
 
+      // 1. More than 1 hour (3600s) of distraction = streak broken
       if (distractingTime > MAX_ALLOWED_DISTRACTION_TIME) {
         streakFailed = true;
         break; // A single failure breaks the streak entirely
       }
 
-      // If we passed the day, increment evaluating target
+      // If we passed the day safely, increment evaluating target
       evaluatingDateStr.setDate(evaluatingDateStr.getDate() + 1);
 
-      // We only count it as a "streak day" if they had *some* productive interaction (optional but a good idea)
-      // For simplicity, we just assume if they opened the browser and were under 1 hour distracted, the streak increments
-      // unless it failed.
+      // 2. To gain streak, must have at least 3 hours (10800s) of productive time
       if (!streakFailed) {
-        streakData.currentStreak += 1;
-        streakData.maxStreak = Math.max(streakData.maxStreak, streakData.currentStreak);
+        if (productiveTime >= 10800) {
+          streakData.currentStreak += 1;
+          streakData.maxStreak = Math.max(streakData.maxStreak, streakData.currentStreak);
+        } else {
+          // If they didn't meet the 3 hour goal, the streak resets
+          streakFailed = true;
+          break;
+        }
       }
     }
 
