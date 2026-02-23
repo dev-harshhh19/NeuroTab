@@ -178,21 +178,15 @@ export function generateId() {
 }
 
 /**
- * Calculate focus score based on distractions
+ * Calculate focus score based on duration
  * @param {number} sessionDuration - Total session duration in seconds
  * @param {number} distractionCount - Number of distraction attempts
- * @returns {number} Score 0-100
+ * @returns {number} Score equal to minutes spent
  */
 export function calculateFocusScore(sessionDuration, distractionCount) {
   if (sessionDuration === 0) return 0;
 
-  // Base score starts at 100
-  // Lose points for each distraction (weighted by session length)
-  const minutesInSession = sessionDuration / 60;
-  const distractionsPerMinute = distractionCount / minutesInSession;
-
-  // 0 distractions = 100, more distractions = lower score
-  let score = 100 - (distractionsPerMinute * 20);
-
-  return Math.max(0, Math.min(100, Math.round(score)));
+  // Score is number of minutes spent
+  const minutesInSession = Math.floor(sessionDuration / 60);
+  return minutesInSession;
 }
