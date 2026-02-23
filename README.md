@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="icons/icon128.png" height="128" width="128" alt="NeuroTab Logo" />
+  <img src="icons/icon128.svg" height="128" width="128" alt="NeuroTab Logo" />
   <h1>NeuroTab</h1>
   <p><b>A highly opinionated, beautifully minimal Chrome extension to reclaim your focus.</b></p>
 </div>
@@ -10,7 +10,7 @@
 
 NeuroTab is a distraction-blocking browser extension that I built to help build better browsing habits. Whether you need a gentle nudge to stay on task or a strict, locked-down environment for a deep work session, NeuroTab adapts to your workflow.
 
-> **Note:** This is a personal portfolio project built by [Harshad Nikam](https://github.com/harshhh19). It is fully open-source and intended to showcase frontend logic, Chrome Extension manifest v3 integration, and strict, state-driven UI patterns.
+> **Note:** This is a personal portfolio project built by [Harshad Nikam](https://www.harshadnikam.me/). It is fully open-source and intended to showcase frontend logic, Chrome Extension manifest v3 integration, and strict, state-driven UI patterns.
 
 ## Features
 - **Deep Work Streaks:** Keep your daily distractions under 1 hour to build your focus streak. Share your stats with friends directly from the dashboard.
