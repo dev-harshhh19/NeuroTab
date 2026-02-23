@@ -250,6 +250,12 @@ async function logDistraction(domain, type) {
 // ============ FOCUS SESSIONS ============
 
 async function startFocusSession(duration) {
+  // End any active exam session first
+  const activeExam = await storage.getActiveExamSession();
+  if (activeExam) {
+    await endExamSession(false);
+  }
+
   const session = {
     id: generateId(),
     startTime: Date.now(),
@@ -292,6 +298,12 @@ async function endFocusSession(completed = false) {
 // ============ EXAM SESSIONS ============
 
 async function startExamSession(duration, tabId) {
+  // End any active focus session first
+  const activeFocus = await storage.getActiveFocusSession();
+  if (activeFocus) {
+    await endFocusSession(false);
+  }
+
   const tab = await chrome.tabs.get(tabId);
 
   const session = {
@@ -399,6 +411,15 @@ async function handleMessage(message) {
       return await getFullStatus();
 
     case 'setMode':
+      if (message.mode === MODES.NORMAL) {
+        if (await storage.getActiveFocusSession()) await endFocusSession(false);
+        if (await storage.getActiveExamSession()) await endExamSession(false);
+      } else if (message.mode === MODES.PRODUCTIVITY) {
+        if (await storage.getActiveExamSession()) await endExamSession(false);
+      } else if (message.mode === MODES.EXAM) {
+        if (await storage.getActiveFocusSession()) await endFocusSession(false);
+      }
+
       await storage.setMode(message.mode);
       if (message.mode === MODES.PRODUCTIVITY && currentTabId && currentDomain) {
         await checkAndBlockIfNeeded(currentTabId, currentDomain);
