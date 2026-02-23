@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - NeuroTab</title>
+  <link rel="stylesheet" href="dashboard.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+  <div class="dashboard">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <img src="../icons/icon48.svg" width="28" height="28" alt="NeuroTab Logo" />
+          <span class="logo-text">NeuroTab</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="#overview" class="nav-item active" data-section="overview">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="7" height="9" />
+            <rect x="14" y="3" width="7" height="5" />
+            <rect x="14" y="12" width="7" height="9" />
+            <rect x="3" y="16" width="7" height="5" />
+          </svg>
+          Overview
+        </a>
+        <a href="#websites" class="nav-item" data-section="websites">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10" />
+            <line x1="2" y1="12" x2="22" y2="12" />
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+          </svg>
+          Websites
+        </a>
+        <a href="#focus" class="nav-item" data-section="focus">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10" />
+            <polyline points="12,6 12,12 16,14" />
+          </svg>
+          Focus Sessions
+        </a>
+        <a href="#settings" class="nav-item" data-section="settings">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3" />
+            <path
+              d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
+          </svg>
+          Settings
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Overview Section -->
+      <section class="section active" id="overview">
+        <header class="section-header" style="display: flex; justify-content: space-between; align-items: flex-start;">
+          <div>
+            <h1>Overview</h1>
+            <p class="section-subtitle">Your productivity at a glance</p>
+          </div>
+          <button id="shareStatsBtn" class="btn btn-primary"
+            style="display: flex; gap: 8px; align-items: center; background: #25D366; border: none;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="18" cy="5" r="3" />
+              <circle cx="6" cy="12" r="3" />
+              <circle cx="18" cy="19" r="3" />
+              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+              <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+            </svg>
+            Share Stats
+          </button>
+        </header>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon productive">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="22,12 18,12 15,21 9,3 6,12 2,12" />
+              </svg>
+            </div>
+            <div class="stat-info">
+              <span class="stat-value" id="todayProductiveTime">0h 0m</span>
+              <span class="stat-label">Productive Today</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon distracting">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="8" x2="12" y2="12" />
+                <line x1="12" y1="16" x2="12.01" y2="16" />
+              </svg>
+            </div>
+            <div class="stat-info">
+              <span class="stat-value" id="todayDistractingTime">0h 0m</span>
+              <span class="stat-label">Distracting Today</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon focus">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10" />
+                <circle cx="12" cy="12" r="4" />
+              </svg>
+            </div>
+            <div class="stat-info">
+              <span class="stat-value" id="todayFocusSessions">0</span>
+              <span class="stat-label">Focus Sessions</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon score">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon
+                  points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" />
+              </svg>
+            </div>
+            <div class="stat-info">
+              <span class="stat-value" id="avgFocusScore">—</span>
+              <span class="stat-label">Avg Focus Score</span>
+            </div>
+          </div>
+
+          <div class="stat-card"
+            style="border: 1px solid rgba(255, 152, 0, 0.3); background: linear-gradient(to bottom right, var(--bg-card), rgba(255,152,0,0.05));">
+            <div class="stat-icon" style="background: rgba(255, 152, 0, 0.1); color: #ff9800;">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                <path d="M12 2c0 0-5 6-5 11 0 4.418 5 9 5 9s5-4.582 5-9c0-5-5-11-5-11z" />
+              </svg>
+            </div>
+            <div class="stat-info">
+              <span class="stat-value" id="streakValueDashboard" style="color: #ff9800;">0 Days</span>
+              <span class="stat-label" id="maxStreakValue" style="font-size: 11px;">Max: 0 Days</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Charts Row -->
+        <div class="charts-row">
+          <div class="chart-card">
+            <h3 class="chart-title">Weekly Activity</h3>
+            <div class="chart-container">
+              <canvas id="weeklyChart"></canvas>
+            </div>
+          </div>
+
+          <div class="chart-card">
+            <h3 class="chart-title">Time Distribution</h3>
+            <div class="chart-container doughnut">
+              <canvas id="distributionChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Top Sites -->
+        <div class="card">
+          <h3 class="card-title">Today's Top Sites</h3>
+          <div class="sites-list" id="topSitesList">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Websites Section -->
+      <section class="section" id="websites">
+        <header class="section-header">
+          <h1>Website Management</h1>
+          <p class="section-subtitle">Customize rules for each website</p>
+        </header>
+
+        <!-- Add Rule Form -->
+        <div class="card add-rule-card">
+          <h3 class="card-title">Add Website Rule</h3>
+          <form class="add-rule-form" id="addRuleForm">
+            <input type="text" id="newDomain" placeholder="example.com" class="input" required>
+            <select id="newCategory" class="select">
+              <option value="distracting">Distracting</option>
+              <option value="productive">Productive</option>
+              <option value="neutral">Neutral</option>
+            </select>
+            <input type="number" id="newLimit" placeholder="Limit (min)" class="input" min="1" max="1440">
+            <button type="submit" class="btn btn-primary">Add Rule</button>
+          </form>
+        </div>
+
+        <!-- Rules List -->
+        <div class="card">
+          <h3 class="card-title">Current Rules</h3>
+          <div class="rules-list" id="rulesList">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Focus Sessions Section -->
+      <section class="section" id="focus">
+        <header class="section-header">
+          <h1>Focus Sessions</h1>
+          <p class="section-subtitle">Track your deep work sessions</p>
+        </header>
+
+        <!-- Focus Stats -->
+        <div class="focus-stats-grid">
+          <div class="focus-stat-card">
+            <span class="focus-stat-value" id="totalSessions">0</span>
+            <span class="focus-stat-label">Total Sessions</span>
+          </div>
+          <div class="focus-stat-card">
+            <span class="focus-stat-value" id="completedSessions">0</span>
+            <span class="focus-stat-label">Completed</span>
+          </div>
+          <div class="focus-stat-card">
+            <span class="focus-stat-value" id="totalFocusTime">0h</span>
+            <span class="focus-stat-label">Total Focus Time</span>
+          </div>
+          <div class="focus-stat-card">
+            <span class="focus-stat-value" id="avgScore">—</span>
+            <span class="focus-stat-label">Average Score</span>
+          </div>
+        </div>
+
+        <!-- Sessions History -->
+        <div class="card">
+          <h3 class="card-title">Recent Sessions</h3>
+          <div class="sessions-list" id="sessionsList">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Settings Section -->
+      <section class="section" id="settings">
+        <header class="section-header">
+          <h1>Settings</h1>
+          <p class="section-subtitle">Customize your experience</p>
+        </header>
+
+        <div class="settings-grid">
+          <div class="card settings-card">
+            <h3 class="card-title">General</h3>
+            <div class="setting-item">
+              <div class="setting-info">
+                <span class="setting-label">Show Notifications</span>
+                <span class="setting-desc">Get notified about time limits and focus sessions</span>
+              </div>
+              <label class="toggle">
+                <input type="checkbox" id="showNotifications" checked>
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+            <div class="setting-item">
+              <div class="setting-info">
+                <span class="setting-label">Strict Mode</span>
+                <span class="setting-desc">Cannot exit productivity mode until session ends</span>
+              </div>
+              <label class="toggle">
+                <input type="checkbox" id="strictMode">
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="card settings-card">
+            <h3 class="card-title">Time Limits</h3>
+            <div class="setting-item">
+              <div class="setting-info">
+                <span class="setting-label">Default Daily Limit</span>
+                <span class="setting-desc">For distracting websites</span>
+              </div>
+              <div class="setting-input">
+                <input type="number" id="defaultLimit" value="30" min="5" max="240" class="input small">
+                <span>minutes</span>
+              </div>
+            </div>
+            <div class="setting-item">
+              <div class="setting-info">
+                <span class="setting-label">Warning Threshold</span>
+                <span class="setting-desc">Warn before limit is reached</span>
+              </div>
+              <div class="setting-input">
+                <input type="number" id="warningThreshold" value="5" min="1" max="30" class="input small">
+                <span>minutes</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card settings-card">
+            <h3 class="card-title">Data</h3>
+            <div class="setting-item">
+              <div class="setting-info">
+                <span class="setting-label">Export Data</span>
+                <span class="setting-desc">Download all your data as JSON</span>
+              </div>
+              <button class="btn btn-secondary" id="exportBtn">Export</button>
+            </div>
+            <div class="setting-item">
+              <div class="setting-info">
+                <span class="setting-label">Clear All Data</span>
+                <span class="setting-desc">Reset everything (cannot be undone)</span>
+              </div>
+              <button class="btn btn-danger" id="clearBtn">Clear Data</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="dashboard.js" type="module"></script>
+</body>
+
+</html>
