@@ -65,7 +65,7 @@ NeuroTab relies on establishing baseline rules. Before starting a Focus or Exam 
 
 ## Contributing
 Contributions, issues, and feature requests are welcome! 
-Feel free to check out the [issues page]{https://github.com/dev-harshhh19/NeuroTab/issues) to propose new features or report bugs.
+Feel free to check out the [issues page](https://github.com/dev-harshhh19/NeuroTab/issues) to propose new features or report bugs.
 
 1. Fork the Project
 2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
