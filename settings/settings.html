@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings - NeuroTab</title>
+  <link rel="stylesheet" href="settings.css">
+</head>
+
+<body>
+  <div class="settings-page">
+    <!-- Header -->
+    <header class="header">
+      <button class="back-btn" id="backBtn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="19" y1="12" x2="5" y2="12" />
+          <polyline points="12,19 5,12 12,5" />
+        </svg>
+      </button>
+      <div class="logo">
+        <img src="../icons/icon48.svg" width="24" height="24" alt="NeuroTab Logo" />
+        <span>NeuroTabSettings</span>
+      </div>
+    </header>
+
+    <!-- Content -->
+    <main class="content">
+      <!-- Quick Add Sites -->
+      <section class="card">
+        <h2 class="card-title">Quick Add Distracting Sites</h2>
+        <p class="card-desc">Add websites that distract you. They'll be blocked in Focus Mode.</p>
+
+        <form class="add-site-form" id="addSiteForm">
+          <input type="text" id="siteInput" placeholder="e.g., youtube.com" class="input">
+          <button type="submit" class="btn btn-primary">Add</button>
+        </form>
+
+        <div class="sites-chips" id="distractingSites">
+          <!-- Populated by JS -->
+        </div>
+      </section>
+
+      <!-- Default Time Limit -->
+      <section class="card">
+        <h2 class="card-title">Default Time Limit</h2>
+        <p class="card-desc">Daily limit for distracting websites in Normal Mode</p>
+
+        <div class="time-limit-selector">
+          <button class="limit-btn" data-limit="15">15m</button>
+          <button class="limit-btn" data-limit="30">30m</button>
+          <button class="limit-btn active" data-limit="45">45m</button>
+          <button class="limit-btn" data-limit="60">1h</button>
+          <button class="limit-btn" data-limit="120">2h</button>
+        </div>
+      </section>
+
+      <!-- Focus Session Defaults -->
+      <section class="card">
+        <h2 class="card-title">Focus Session Defaults</h2>
+        <p class="card-desc">Default duration for new focus sessions</p>
+
+        <div class="time-limit-selector">
+          <button class="focus-btn" data-duration="15">15m</button>
+          <button class="focus-btn active" data-duration="25">25m</button>
+          <button class="focus-btn" data-duration="45">45m</button>
+          <button class="focus-btn" data-duration="60">1h</button>
+        </div>
+      </section>
+
+      <!-- Notifications -->
+      <section class="card">
+        <h2 class="card-title">Notifications</h2>
+
+        <div class="setting-row">
+          <div class="setting-info">
+            <span class="setting-label">Time Limit Warnings</span>
+            <span class="setting-desc">Get notified before reaching daily limits</span>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" id="timeLimitWarnings" checked>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="setting-row">
+          <div class="setting-info">
+            <span class="setting-label">Focus Session Reminders</span>
+            <span class="setting-desc">Celebrate completed focus sessions</span>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" id="focusReminders" checked>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+      </section>
+
+      <!-- About -->
+      <section class="card about-card">
+        <div class="about-logo">
+          <img src="../icons/icon48.svg" width="48" height="48" alt="NeuroTab Logo" />
+        </div>
+        <h3>NeuroTab</h3>
+        <p>Version 1.0.0</p>
+        <p class="about-tagline">Control + Awareness, not punishment</p>
+      </section>
+    </main>
+  </div>
+
+  <script src="settings.js" type="module"></script>
+</body>
+
+</html>

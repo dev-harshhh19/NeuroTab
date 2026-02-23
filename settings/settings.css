@@ -1,0 +1,329 @@
+/* ============ MINIMAL B/W Theme ============ */
+:root {
+  --bg-dark: hsl(202 27% 1%);
+  --bg: hsl(201 17% 4%);
+  --bg-light: hsl(200 9% 9%);
+  --text: hsl(201 44% 95%);
+  --text-muted: hsl(201 7% 69%);
+  --highlight: hsl(201 5% 39%);
+  --border: hsl(200 7% 28%);
+  --border-muted: hsl(200 10% 18%);
+
+  --primary: hsl(199 70% 65%);
+  --secondary: hsl(22 68% 68%);
+  --danger: hsl(9 26% 64%);
+
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-full: 9999px;
+}
+
+/* ============ BASE ============ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+.settings-page {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 40px 24px;
+}
+
+/* ============ HEADER ============ */
+.header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.back-btn {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-light);
+  border: 1px solid var(--border-muted);
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.back-btn:hover {
+  border-color: var(--border);
+  color: var(--text);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+}
+
+/* ============ CONTENT ============ */
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ============ CARD ============ */
+.card {
+  background: var(--bg-light);
+  border: 1px solid var(--border-muted);
+  border-radius: var(--radius-md);
+  padding: 24px;
+}
+
+.card-title {
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+  color: var(--text-muted);
+}
+
+.card-desc {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+}
+
+/* ============ ADD SITE FORM ============ */
+.add-site-form {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.input {
+  flex: 1;
+  padding: 10px 14px;
+  background: var(--bg);
+  border: 1px solid var(--border-muted);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.input:focus {
+  border-color: var(--border);
+}
+
+.btn {
+  padding: 10px 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-primary {
+  background: var(--text);
+  color: var(--bg);
+  border-color: var(--text);
+}
+
+.btn-primary:hover {
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* ============ SITES CHIPS ============ */
+.sites-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.site-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  font-size: 13px;
+  color: var(--text);
+}
+
+.chip-remove {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  transition: color 0.2s;
+}
+
+.chip-remove:hover {
+  color: var(--danger);
+}
+
+/* ============ TIME LIMIT SELECTOR ============ */
+.time-limit-selector {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.limit-btn,
+.focus-btn {
+  padding: 10px 16px;
+  background: var(--bg);
+  border: 1px solid var(--border-muted);
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.limit-btn:hover,
+.focus-btn:hover {
+  border-color: var(--border);
+  color: var(--text);
+}
+
+.limit-btn.active,
+.focus-btn.active {
+  background: var(--text);
+  border-color: var(--text);
+  color: var(--bg);
+}
+
+/* ============ SETTING ROW ============ */
+.setting-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border-muted);
+}
+
+.setting-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.setting-row:first-child {
+  padding-top: 0;
+}
+
+.setting-info {
+  flex: 1;
+}
+
+.setting-label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 4px;
+  color: var(--text);
+}
+
+.setting-desc {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* ============ TOGGLE ============ */
+.toggle {
+  position: relative;
+  width: 44px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  inset: 0;
+  background: var(--bg);
+  border: 1px solid var(--border-muted);
+  border-radius: 24px;
+  transition: all 0.2s;
+}
+
+.toggle-slider::before {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  left: 3px;
+  bottom: 3px;
+  background: var(--text-muted);
+  border-radius: 50%;
+  transition: all 0.2s;
+}
+
+.toggle input:checked+.toggle-slider {
+  background: var(--text);
+  border-color: var(--text);
+}
+
+.toggle input:checked+.toggle-slider::before {
+  background: var(--bg);
+  transform: translateX(20px);
+}
+
+/* ============ ABOUT ============ */
+.about-card {
+  text-align: center;
+  padding: 32px;
+  background: transparent;
+  border: 1px dashed var(--border-muted);
+}
+
+.about-logo {
+  margin-bottom: 16px;
+  color: var(--text);
+}
+
+.about-card h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 4px;
+  letter-spacing: -0.5px;
+}
+
+.about-card p {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.about-tagline {
+  margin-top: 12px;
+  font-style: italic;
+}
