@@ -1,0 +1,32 @@
+name: Release Extension
+
+on:
+  push:
+    tags:
+      - 'v*' # Trigger this workflow when a new tag like v1.0.0 is pushed
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Create Release Zip
+        run: |
+          # Extract version from manifest.json
+          VERSION=$(grep '"version"' manifest.json | cut -d '"' -f 4)
+          ZIP_NAME="NeuroTab-v${VERSION}.zip"
+          
+          # Pass the zip name to the next step
+          echo "ZIP_NAME=$ZIP_NAME" >> $GITHUB_ENV
+          
+          # Create zip excluding dev files
+          zip -r $ZIP_NAME . -x "*.git*" -x "*.github*" -x "*.agents*" -x "*.vscode*" -x "node_modules/*" -x "*.zip"
+          
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ${{ env.ZIP_NAME }}
+          generate_release_notes: true
