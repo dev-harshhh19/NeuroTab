@@ -32,6 +32,9 @@ NeuroTab is currently an open-source project and is **not** available on the Chr
    ```
    *(Or click "Code" > "Download ZIP" and extract the files).*
 
+   or you can just use the release zip file from the release section
+   [here](https://github.com/dev-harshhh19/NeuroTab/releases/).
+
 2. **Open Chrome Extensions Page:**
    Navigate your browser to `chrome://extensions/`.
 
