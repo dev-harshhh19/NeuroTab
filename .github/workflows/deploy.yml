@@ -5,6 +5,9 @@ on:
     tags:
       - 'v*' # Trigger this workflow when a new tag like v1.0.0 is pushed
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -13,14 +16,23 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         
-      - name: Create Release Zip
+      - name: Check Version Match and Create Release Zip
+        id: build_zip
         run: |
-          # Extract version from manifest.json
-          VERSION=$(grep '"version"' manifest.json | cut -d '"' -f 4)
+          # Extract version from manifest.json using jq
+          VERSION=$(jq -r '.version' manifest.json)
+          
+          # Validate that the tag version matches the manifest version
+          if [ "v$VERSION" != "$GITHUB_REF_NAME" ]; then
+            echo "Error: Tag version ($GITHUB_REF_NAME) does not match manifest version (v$VERSION)"
+            exit 1
+          fi
+          
           ZIP_NAME="NeuroTab-v${VERSION}.zip"
+          echo "Version match confirmed! Creating $ZIP_NAME..."
           
           # Pass the zip name to the next step
-          echo "ZIP_NAME=$ZIP_NAME" >> $GITHUB_ENV
+          echo "zip_name=$ZIP_NAME" >> $GITHUB_OUTPUT
           
           # Create zip excluding dev files
           zip -r $ZIP_NAME . -x "*.git*" -x "*.github*" -x "*.agents*" -x "*.vscode*" -x "node_modules/*" -x "*.zip"
@@ -28,5 +40,5 @@ jobs:
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          files: ${{ env.ZIP_NAME }}
+          files: ${{ steps.build_zip.outputs.zip_name }}
           generate_release_notes: true
